@@ -1,6 +1,7 @@
 name: Eval Smoke Test
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
