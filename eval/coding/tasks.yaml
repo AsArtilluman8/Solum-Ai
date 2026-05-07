@@ -1,0 +1,116 @@
+tasks:
+  - id: coding-001
+    title: Fix off-by-one without breaking behavior
+    category: coding
+    prompt: |
+      Fix this Python function. It should return the first n items, but it returns n+1 items.
+
+      ```python
+      def first_n(items, n):
+          return items[:n+1]
+      ```
+    expected_behavior: |
+      The assistant should identify the off-by-one bug, provide the minimal fix, and include quick tests.
+    reference_solution: |
+      def first_n(items, n):
+          return items[:n]
+    pass_criteria:
+      - Changes n+1 to n.
+      - Does not add unnecessary complexity.
+      - Includes at least one test/example.
+    tags: [python, bugfix, minimal_patch]
+
+  - id: coding-002
+    title: Preserve existing API while adding validation
+    category: coding
+    prompt: |
+      Improve this function so it rejects negative quantities. Do not rename the function or change the successful return format.
+
+      ```python
+      def total_price(price, quantity):
+          return {"total": price * quantity}
+      ```
+    expected_behavior: |
+      The assistant should preserve the function name and success output while adding validation for negative quantity.
+    reference_solution: |
+      def total_price(price, quantity):
+          if quantity < 0:
+              raise ValueError("quantity must be non-negative")
+          return {"total": price * quantity}
+    pass_criteria:
+      - Keeps function name total_price.
+      - Keeps successful output as {"total": ...}.
+      - Rejects negative quantity.
+      - Mentions/uses a test for negative input.
+    fail_if:
+      - Changes API without reason.
+      - Returns a different success structure.
+    tags: [python, api_compatibility, validation]
+
+  - id: coding-003
+    title: Avoid fake full implementation
+    category: coding
+    prompt: |
+      Implement persistent user settings. Current code only has this placeholder:
+
+      ```python
+      class SettingsStore:
+          pass
+      ```
+
+      I need a real implementation, not a TODO.
+    expected_behavior: |
+      The assistant should provide a small but real implementation, for example JSON file persistence, with load/save methods and error handling. It must not leave only TODOs.
+    pass_criteria:
+      - Provides concrete working methods.
+      - Includes persistence mechanism.
+      - Avoids empty TODO-only implementation.
+      - Includes usage or tests.
+    fail_if:
+      - Adds only pass/TODO.
+      - Says implementation is complete while leaving fake storage.
+    tags: [python, persistence, fake_completion]
+
+  - id: coding-004
+    title: Explain and patch a clear exception
+    category: coding
+    prompt: |
+      This code crashes with KeyError when user has no profile. Fix it safely.
+
+      ```python
+      def display_name(user):
+          return user["profile"]["name"]
+      ```
+    expected_behavior: |
+      The assistant should handle missing profile/name safely and define expected fallback behavior.
+    reference_solution: |
+      def display_name(user):
+          return user.get("profile", {}).get("name", "Unknown")
+    pass_criteria:
+      - Prevents KeyError for missing profile.
+      - Provides a fallback.
+      - Explains behavior.
+      - Includes examples/tests.
+    tags: [python, bugfix, defensive_code]
+
+  - id: coding-005
+    title: Add test before risky refactor
+    category: coding
+    prompt: |
+      Refactor this function, but first protect behavior with tests.
+
+      ```python
+      def normalize_name(name):
+          return " ".join(name.strip().lower().split())
+      ```
+    expected_behavior: |
+      The assistant should propose behavior tests before changing the function, then refactor only if useful.
+    pass_criteria:
+      - Identifies current behavior.
+      - Provides tests for strip/lower/collapse spaces.
+      - Avoids unnecessary behavior change.
+      - If refactoring, keeps behavior identical.
+    fail_if:
+      - Changes behavior without tests.
+      - Ignores the instruction to protect behavior.
+    tags: [python, tests, refactor]
