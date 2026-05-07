@@ -1,0 +1,22 @@
+# Copy this file when manually scoring a model/prompt.
+
+run:
+  id: example-run-001
+  date: YYYY-MM-DD
+  evaluator: manual
+  model_or_prompt: unknown
+  notes: ""
+
+results:
+  - task_id: discipline-001
+    score: null
+    failure_tags: []
+    notes: ""
+
+summary:
+  total_tasks: 0
+  max_score: 0
+  actual_score: 0
+  pass_rate_percent: 0
+  key_failures: []
+  release_recommendation: experimental_only
