@@ -1,0 +1,42 @@
+name: Eval Smoke Test
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  eval-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: List eval tasks
+        run: python tools/eval_runner.py list
+
+      - name: Export manual scoring template
+        run: |
+          mkdir -p eval/runs
+          python tools/eval_runner.py export \
+            --run-id smoke-test \
+            --model "smoke-test" \
+            --out eval/runs/smoke-test.yaml
+
+      - name: Fill smoke scores
+        run: python tools/fill_smoke_scores.py eval/runs/smoke-test.yaml
+
+      - name: Generate smoke report
+        run: |
+          python tools/eval_runner.py report \
+            --results eval/runs/smoke-test.yaml \
+            --out eval/runs/smoke-test.md
+
+      - name: Verify smoke report exists
+        run: test -s eval/runs/smoke-test.md
