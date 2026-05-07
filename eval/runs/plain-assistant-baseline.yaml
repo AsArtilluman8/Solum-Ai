@@ -1,0 +1,91 @@
+run:
+  id: plain-assistant-baseline
+  date: YYYY-MM-DD
+  evaluator: manual
+  model_or_prompt: plain assistant / no Solum rules
+  notes: "Baseline A: normal assistant behavior. Fill scores manually."
+
+results:
+  - task_id: discipline-001
+    category: discipline
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: discipline-002
+    category: discipline
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: discipline-003
+    category: discipline
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: discipline-004
+    category: discipline
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: discipline-005
+    category: discipline
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: coding-001
+    category: coding
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: coding-002
+    category: coding
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: coding-003
+    category: coding
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: coding-004
+    category: coding
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: coding-005
+    category: coding
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: verification-001
+    category: verification
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: verification-002
+    category: verification
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: verification-003
+    category: verification
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: verification-004
+    category: verification
+    score: null
+    failure_tags: []
+    notes: ""
+  - task_id: verification-005
+    category: verification
+    score: null
+    failure_tags: []
+    notes: ""
+
+summary:
+  total_tasks: 15
+  max_score: 30
+  actual_score: 0
+  pass_rate_percent: 0
+  key_failures: []
+  release_recommendation: experimental_only
